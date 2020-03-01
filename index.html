@@ -26,10 +26,10 @@
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
                            <button onclick="decrementValue()" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" id="number" value="1">
+                           <input type="text" class="form-control text-center" id="number" value="0">
                            <button onclick="incrementValue()" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$ <span id="price">100</span></h5>
+                        <h5>$ <span id="price">0</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item" id="dltItem">
                      </div>
                   </div>
@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
-                        <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5>$ <span id="subTotal" ></span></span> </h5>
+                        <h5>$ <span id="tax">0</span> </h5>
+                        <h5>$ <span id="total">0</span> </h5>
                      </div>
                   </div>
                </div>
@@ -96,24 +96,55 @@
          if (value < 10) {
             value++;
             document.getElementById('number').value = value;
+            var price = parseInt(document.getElementById("price").innerText);
+            var total = price + 100;
+            document.getElementById("price").innerText = total;
+
+            // Subtotal section
+            var subTotal = parseInt(document.getElementById("subTotal").innerText);
+            var subTotal = price + 100;
+            document.getElementById("subTotal").innerText = total;
+
+            // tax section
+            var tax = parseInt(document.getElementById("tax").innerText);
+            var tax = subTotal * 0.5 / 100;
+            document.getElementById("tax").innerText = tax;
+
+
+            // total sec
+            var total = parseInt(document.getElementById("total").innerText);
+            var total = subTotal + tax;
+            document.getElementById("total").innerText = total;
          }
-         var price = parseInt(document.getElementById("price").innerText);
-         var total = price + 100;
-         document.getElementById("price").innerText = total;
       }
       function decrementValue(){
          var value = parseInt(document.getElementById('number').value, 10);
          value = isNaN(value) ? 0 : value;
-         if (value > 1) {
+         if (value > 0) {
             value--;
             document.getElementById('number').value = value;
+            var price = parseInt(document.getElementById("price").innerText);
+            var total = price - 100;
+            document.getElementById("price").innerText = total;
+
+            // subTotal section
+            var subTotal = parseInt(document.getElementById("subTotal").innerText);
+            var subTotal = price + 100;
+            document.getElementById("subTotal").innerText = total;
+
+            // tax section
+            var tax = parseInt(document.getElementById("tax").innerText);
+            var tax = (tax - 0.5);
+            document.getElementById("tax").innerText = tax;
+
+            // total sec
+            var total = parseInt(document.getElementById("total").innerText);
+            var total = subTotal - tax;
+            document.getElementById("total").innerText = total;
          }
-         var price = parseInt(document.getElementById("price").innerText);
-         var total = price - 100;
-         document.getElementById("price").innerText = total;
-         
       }
-      
+
+        
    </script>
 </body>
 
